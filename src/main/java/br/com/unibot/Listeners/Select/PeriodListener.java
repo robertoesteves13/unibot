@@ -1,24 +1,36 @@
 package br.com.unibot.Listeners.Select;
 
+import java.util.Set;
+
 import discord4j.common.util.Snowflake;
 import discord4j.core.event.domain.interaction.ComponentInteractionEvent;
 import discord4j.core.event.domain.interaction.SelectMenuInteractionEvent;
 import reactor.core.publisher.Mono;
 
 public class PeriodListener {
-  public static Mono<?> listen(ComponentInteractionEvent event) {
-    var selectEvent = (SelectMenuInteractionEvent) event;
-    var idSelected = selectEvent.getValues().get(0);
-    var member = selectEvent.getInteraction().getMember().get();
+  private static String roleMorningId = "943239519480709180";
+  private static String roleNightId = "943239555253956618";
 
-    if (idSelected.equals("period-morning")) {
-      System.out.println("Morning selected");
-      member.addRole(Snowflake.of("943239519480709180")).subscribe();
-    } else if (idSelected.equals("period-night")) {
-      System.out.println("Night selected");
-      member.addRole(Snowflake.of("943239555253956618")).subscribe();
+  private static Set<Snowflake> rolesPeriod = Set.of(Snowflake.of(roleMorningId), Snowflake.of(roleNightId));
+
+  public static Mono<?> listen(ComponentInteractionEvent pEvent) {
+    var event = (SelectMenuInteractionEvent) pEvent;
+    var idSelected = event.getValues().get(0);
+    var member = event.getInteraction().getMember().get();
+
+    for (var role : rolesPeriod) {
+      if (member.getRoleIds().contains(role))
+        return event.reply(
+            "Você já selecionou um dos cargos acima, por favor contatar um dos admins caso foi um erro.")
+            .withEphemeral(true);
     }
 
-    return selectEvent.reply("Período selecionado: " + idSelected).withEphemeral(true);
+    if (idSelected.equals("period-morning")) {
+      member.addRole(Snowflake.of(roleMorningId)).subscribe();
+    } else if (idSelected.equals("period-night")) {
+      member.addRole(Snowflake.of(roleNightId)).subscribe();
+    }
+
+    return event.reply("Cargo selecionado com sucesso!").withEphemeral(true);
   }
 }
