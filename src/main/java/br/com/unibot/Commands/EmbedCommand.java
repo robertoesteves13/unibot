@@ -1,7 +1,5 @@
 package br.com.unibot.Commands;
 
-import java.util.Set;
-
 import br.com.unibot.ComponentsFactory;
 import discord4j.common.util.Snowflake;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
@@ -27,6 +25,10 @@ public class EmbedCommand implements Command {
       return event.reply("Você não tem permissão para executar este comando!")
         .withEphemeral(true);
     }
+    var labelOption = event.getOption("label")
+        .flatMap(ApplicationCommandInteractionOption::getValue)
+        .map(ApplicationCommandInteractionOptionValue::asString)
+        .orElse("");
 
     var typeOption = event.getOption("type")
         .flatMap(ApplicationCommandInteractionOption::getValue)
@@ -34,6 +36,6 @@ public class EmbedCommand implements Command {
         .orElse("");
 
     var component = ComponentsFactory.create(typeOption);
-    return event.reply("Selecione o período:").withComponents(ActionRow.of(component.getComponent()));
+    return event.reply(labelOption).withComponents(ActionRow.of(component.getComponent()));
   }
 }
