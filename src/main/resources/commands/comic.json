@@ -1,0 +1,5 @@
+{
+  "name": "comic",
+  "description": "Gets an xkcd comic from their API",
+  "options": []
+}
