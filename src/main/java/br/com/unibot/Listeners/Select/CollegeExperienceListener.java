@@ -8,9 +8,9 @@ import discord4j.core.event.domain.interaction.SelectMenuInteractionEvent;
 import reactor.core.publisher.Mono;
 
 public class CollegeExperienceListener {
-  private static Snowflake roleFreshmanId = Snowflake.of("943239519480709180");
+  private static Snowflake roleFreshmanId = Snowflake.of("943239716134854656");
   private static Snowflake roleExperiencedId = Snowflake.of("945615524925169665");
-  private static Snowflake roleVeteranId = Snowflake.of("943239555253956618");
+  private static Snowflake roleVeteranId = Snowflake.of("943239652431786004");
 
   private static Set<Snowflake> rolesExperience = Set.of(roleFreshmanId, roleExperiencedId, roleVeteranId);
 
