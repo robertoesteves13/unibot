@@ -43,7 +43,6 @@ public class CommandHandler {
 
     var commands = new ArrayList<ApplicationCommandRequest>();
     for (var json : getCommandsJson(filenames)) {
-      System.out.println(json);
       var request = d4jMapper.getObjectMapper().readValue(json, ApplicationCommandRequest.class);
       commands.add(request);
     }
