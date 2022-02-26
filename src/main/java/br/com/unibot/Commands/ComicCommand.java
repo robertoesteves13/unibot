@@ -1,6 +1,5 @@
 package br.com.unibot.Commands;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -10,21 +9,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.unibot.Models.Comic;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
 import discord4j.core.spec.EmbedCreateSpec;
+import discord4j.discordjson.json.ApplicationCommandRequest;
+import discord4j.rest.RestClient;
 import discord4j.rest.util.Color;
 import reactor.core.publisher.Mono;
 
 public class ComicCommand implements Command {
-  private String name;
+  public final String name = "comic";
 
   private Comic comic;
   private int comicAmount = 2584;
 
-  public ComicCommand() {
-    this.name = "comic";
+  public ComicCommand(RestClient client) {
+    long appId = client.getApplicationId().block();
+    var command = this.build(appId);
+    
+    client.getApplicationService()
+      .createGlobalApplicationCommand(appId, command)
+      .subscribe();
   }
 
-  public String getName() {
-    return this.name;
+  private ApplicationCommandRequest build(long appId) {
+    return ApplicationCommandRequest.builder()
+      .name(name)
+      .description("Gets a comic from the internet")
+      .build();
   }
 
   public Mono<?> run(ChatInputInteractionEvent event) {
