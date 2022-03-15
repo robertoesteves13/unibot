@@ -9,6 +9,6 @@ public class PeriodComponent implements Component {
     return SelectMenu.of("period",
         SelectMenu.Option.of("Matutino", "period-morning"),
         SelectMenu.Option.of("Noturno", "period-night")
-        ).withPlaceholder("Qual o perído que você estuda?");
+        ).withPlaceholder("Selecione uma opção");
   }
 }

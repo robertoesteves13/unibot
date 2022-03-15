@@ -9,6 +9,6 @@ public class CollegeExperienceComponent implements Component {
         SelectMenu.Option.of("Entrei neste ano", "college-freshman"),
         SelectMenu.Option.of("Já estava estudando", "college-experienced"),
         SelectMenu.Option.of("Este é meu último ano", "college-veteran")
-        ).withPlaceholder("Quando você entrou na faculdade?");
+        ).withPlaceholder("Selecione uma opção");
   }
 }

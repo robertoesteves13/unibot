@@ -10,6 +10,6 @@ public class CourseComponent implements Component {
         SelectMenu.Option.of("Ciências da computação", "course-cs"),
         SelectMenu.Option.of("Sistemas de informação", "course-si"),
         SelectMenu.Option.of("Sou convidado", "course-guest")
-        ).withPlaceholder("");
+        ).withPlaceholder("Selecione uma opção");
   }
 }
