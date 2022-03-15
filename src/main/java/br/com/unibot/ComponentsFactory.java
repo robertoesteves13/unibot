@@ -2,6 +2,7 @@ package br.com.unibot;
 
 import br.com.unibot.Components.Component;
 import br.com.unibot.Components.CourseComponent;
+import br.com.unibot.Components.InterestsComponent;
 import br.com.unibot.Components.PeriodComponent;
 import br.com.unibot.Components.CollegeExperienceComponent;
 
@@ -14,6 +15,8 @@ public class ComponentsFactory {
         return new CollegeExperienceComponent();
       case "course":
         return new CourseComponent();
+      case "interests":
+        return new InterestsComponent();
       default:
         return null;
     }

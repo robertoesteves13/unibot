@@ -3,6 +3,7 @@ package br.com.unibot;
 import br.com.unibot.Listeners.Select.CollegeExperienceListener;
 import br.com.unibot.Listeners.Select.PeriodListener;
 import br.com.unibot.Listeners.Select.CourseListener;
+import br.com.unibot.Listeners.Select.InterestsListener;
 import discord4j.core.event.domain.interaction.ComponentInteractionEvent;
 import reactor.core.publisher.Mono;
 
@@ -15,6 +16,8 @@ public class ListenerFactory {
         return CollegeExperienceListener.listen(event);
       case "course":
         return CourseListener.listen(event);
+      case "interests":
+        return InterestsListener.listen(event);
       default:
         return Mono.empty();
     }
